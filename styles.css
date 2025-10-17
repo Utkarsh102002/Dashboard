@@ -1,3 +1,4 @@
+/* ===== GLOBAL STYLES ===== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,8 +7,8 @@
 
 body {
   font-family: "Poppins", system-ui, sans-serif;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: #fff;
+  background: #121212; /* solid dark background */
+  color: #ddd;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -15,18 +16,18 @@ body {
 
 /* ===== NAVBAR ===== */
 .navbar {
-  background: linear-gradient(90deg, #ff7eb3, #ff758c, #ff7eb3);
+  background: #1e1e2f; /* darker flat color */
   text-align: center;
   padding: 20px 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  box-shadow: none; /* remove shadow for simpler look */
 }
 
 .navbar h1 {
   font-size: 2rem;
   font-weight: 600;
   letter-spacing: 1px;
-  color: #fff;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+  color: #ddd;
+  text-shadow: none; /* remove glow */
 }
 
 /* ===== DASHBOARD ===== */
@@ -37,123 +38,193 @@ body {
   justify-content: center;
 }
 
+/* ===== GRID ===== */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px; /* consistent gap between cards */
   max-width: 1100px;
   width: 100%;
 }
 
-/* ===== PROJECT CARDS ===== */
+/* ===== PROJECT CARD ===== */
 .project-card {
-  position: relative;
-  border-radius: 18px;
+  position: relative; /* needed for absolute img positioning */
+  border-radius: 12px;
   overflow: hidden;
   text-decoration: none;
-  color: #fff;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  transform: scale(1);
-  transition: all 0.3s ease;
+  color: #ddd;
+  background-color: #222236; /* dark but not glossy */
+  box-shadow: none; /* remove shadow for simple UI */
+  display: flex;
+  flex-direction: column;
+  height: 400px; /* fixed height */
+  transition: background-color 0.3s ease;
+}
+
+/* Image inside project card */
+.project-card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;  /* fill the card width */
+  height: 100%; /* fill the card height */
+  object-fit: cover; /* cover container without distortion */
+  object-position: center center; /* center the image */
+  border: none;
+  display: block;
+  z-index: 0; /* behind overlay content */
 }
 
 .project-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+  background-color: #2a2a3d; /* subtle highlight on hover */
 }
 
-/* ===== IMAGE BACKGROUND ===== */
-.thumb {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  inset: 0;
-}
-
-.thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: brightness(60%) saturate(120%);
-  transition: 0.3s ease;
-}
-
-.project-card:hover .thumb img {
-  filter: brightness(85%) saturate(130%);
-  transform: scale(1.05);
-}
-
-/* ===== OVERLAY CONTENT ===== */
+/* ===== CONTENT OVERLAY ===== */
 .content {
-  position: absolute;
-  inset: 0;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 24px 20px;
-  background: linear-gradient(180deg, rgba(0,0,0,0.1) 30%, rgba(0,0,0,0.75) 100%);
-  z-index: 2;
+  padding: 20px;
+  background: rgba(18, 18, 18, 0.85); /* dark translucent overlay */
+  z-index: 1;
+  gap: 8px;
+  height: 100%; /* fill full height of card */
+  overflow-y: auto; /* scroll if content overflows */
+  box-sizing: border-box;
+}
+
+/* Scrollbar styling */
+.content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background-color: #444466;
+  border-radius: 3px;
 }
 
 .content h3 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 600;
-  margin-bottom: 8px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  margin: 0;
+  color: #eee;
 }
 
 .content p {
   font-size: 0.95rem;
-  margin-bottom: 12px;
-  color: #eee;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  margin: 0;
+  color: #ccc;
 }
 
 /* ===== TAGS ===== */
 .tags {
+  margin-top: auto;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
   list-style: none;
+  padding: 0;
 }
 
 .tags li {
-  background: rgba(255, 255, 255, 0.2);
+  background: #444466;
   padding: 6px 12px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  color: #fff;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 16px;
+  font-size: 0.75rem;
+  color: #ddd;
 }
 
-/* ===== ANIMATED GRADIENT BORDER ===== */
-.project-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  padding: 2px;
-  border-radius: 18px;
-  background: linear-gradient(45deg, #ff7eb3, #ff758c, #6a11cb, #2575fc);
-  background-size: 300% 300%;
-  animation: gradientBorder 6s ease infinite;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-}
+/* ===== RESPONSIVE FOR SMALL SCREENS ===== */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    padding: 0 10px;
+  }
 
-@keyframes gradientBorder {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+  .project-card {
+    height: 350px;
+  }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 600px) {
-  .navbar h1 {
-    font-size: 1.5rem;
+  .content {
+    padding: 16px;
+    gap: 6px;
   }
 
   .content h3 {
     font-size: 1.1rem;
+  }
+
+  .content p {
+    font-size: 0.85rem;
+  }
+
+  .tags li {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    padding: 0 8px;
+  }
+
+  .project-card {
+    height: 320px;
+  }
+
+  .content {
+    padding: 14px;
+    gap: 4px;
+  }
+
+  .content h3 {
+    font-size: 1rem;
+  }
+
+  .content p {
+    font-size: 0.8rem;
+  }
+
+  .tags li {
+    font-size: 0.65rem;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 280px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .project-card {
+    height: 280px;
+  }
+
+  .content {
+    padding: 12px;
+    gap: 3px;
+  }
+
+  .content h3 {
+    font-size: 0.9rem;
+  }
+
+  .content p {
+    font-size: 0.7rem;
+  }
+
+  .tags li {
+    font-size: 0.6rem;
+    padding: 3px 6px;
   }
 }
